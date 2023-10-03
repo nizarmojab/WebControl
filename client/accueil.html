@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <style>
+        /* Styles pour le formulaire de connexion */
+        body {
+            background-color: #D3D3D3;
+        }
+        form {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+            animation: slide-in 0.5s ease-out;
+        }
+        input[type="text"], input[type="password"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 3px;
+            border: none;
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+        }
+        input[type="submit"] {
+            background-color: #0077be;
+            color: #fff;
+            transition: background-color 0.2s ease-out;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #005d91;
+        }
+        h1 {
+            text-align: center;
+            color: #000000;
+            margin-top: 50px;
+            animation: fade-in 0.5s ease-out;
+        }
+        p {
+            color: #f00;
+        }
+        /* Animations */
+        @keyframes slide-in {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0px);
+                opacity: 1;
+            }
+        }
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenue Mr.Nizar <?php echo $_SESSION['username']; ?> !</h1>
+    <form method="POST" action="">
+        <input type="submit" name="led5" value="Allumer/eteindre la LED " formaction="web_led5.php">
+        <input type="submit" name="temp_hum" value="Afficher la temperature et l'humidite" formaction="update.php">
+        <input type="submit" name="ventilo" value="Allumer/eteindre le ventilateur" formaction="ventillateur.php">
+        <input type="submit" name="logout" value="Se deconnecter" action="login.php">
+    </form>
+    <?php
+    // Traitement des actions des boutons
+    if(isset($_POST['led5'])) {
+        header('Location: web_led5.php');
+        exit();
+    }
+    if(isset($_POST['temp_hum'])) {
+        header('Location: update.php');
+        exit();
+    }
+if(isset($_POST['logout'])) {
+        // Suppression de la variable de session et redirection vers la page de connexion
+        session_unset();
+        session_destroy();
+        header('Location: index.php');
+        exit();
+    }
+    ?>
+</body>
+</html>
+<?php
+}
+?>
